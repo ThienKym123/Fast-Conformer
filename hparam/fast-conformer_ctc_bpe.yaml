@@ -219,7 +219,7 @@ exp_manager:
   checkpoint_callback_params:
     monitor: "val_wer"
     mode: "min"
-    save_top_k: 1
+    save_top_k: 3
     always_save_nemo: True
 
   resume_from_checkpoint: null
