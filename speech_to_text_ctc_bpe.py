@@ -7,7 +7,7 @@ from nemo.utils import logging
 from nemo.utils.exp_manager import exp_manager
 
 
-@hydra_runner(config_path="/kaggle/working/Fast-Conformer/hparam", config_name="fast-conformer_ctc_bpe")
+@hydra_runner(config_path="/kaggle/working/Fast-Conformer/hparam", config_name="FastConformer-CTC-BPE-XLarge")
 def main(cfg):
     logging.info(f'Hydra config: {OmegaConf.to_yaml(cfg)}')
 
