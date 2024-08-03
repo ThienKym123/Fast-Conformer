@@ -99,7 +99,7 @@ model:
     window_stride: 0.01
     window: "hann"
     features: 80
-    n_fft: 1024
+    n_fft: 512
     log: true
     frame_splicing: 1
     dither: 0.00001
