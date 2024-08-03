@@ -42,7 +42,7 @@
 name: "fast-conformer_ctc_bpe"
 # name: "model STT N test"
 
-init_from_pretrained_model: "stt_en_fastconformer_ctc_xlarge" 
+init_from_pretrained_model: "stt_en_fastconformer_ctc_large" 
 
 model:
   sample_rate: 16000
@@ -53,7 +53,7 @@ model:
   train_ds:
     manifest_filepath: /kaggle/working/train_manifest.json
     sample_rate: ${model.sample_rate}
-    batch_size: 16 # you may increase batch_size if your memory allows
+    batch_size: 32 # you may increase batch_size if your memory allows
     shuffle: true
     num_workers: 4
     pin_memory: true
@@ -70,7 +70,7 @@ model:
   validation_ds:
     manifest_filepath: /kaggle/working/validation_manifest.json
     sample_rate: ${model.sample_rate}
-    batch_size: 16 # you may increase batch_size if your memory allows
+    batch_size: 32 # you may increase batch_size if your memory allows
     shuffle: false
     use_start_end_token: false
     num_workers: 4
@@ -79,7 +79,7 @@ model:
   test_ds:
     manifest_filepath: /kaggle/working/test_manifest.json
     sample_rate: ${model.sample_rate}
-    batch_size: 16 # you may increase batch_size if your memory allows
+    batch_size: 32 # you may increase batch_size if your memory allows
     shuffle: false
     use_start_end_token: false
     num_workers: 4
@@ -118,8 +118,8 @@ model:
     _target_: nemo.collections.asr.modules.ConformerEncoder
     feat_in: ${model.preprocessor.features}
     feat_out: -1 # you may set it if you need different output size other than the default d_model
-    n_layers: 24
-    d_model: 1024
+    n_layers: 20
+    d_model: 512
 
     # Sub-sampling params
     subsampling: dw_striding # vggnet, striding, stacking or stacking_norm, dw_striding
@@ -136,7 +136,7 @@ model:
     # [left, right] specifies the number of steps to be seen from left and right of each step in self-attention
     att_context_size: [-1, -1] # -1 means unlimited context
     att_context_style: regular # regular or chunked_limited
-    xscaling: False # scales up the input embeddings by sqrt(d_model)
+    xscaling: True # scales up the input embeddings by sqrt(d_model)
     untie_biases: true # unties the biases of the TransformerXL layers
     pos_emb_max_len: 5000
 
