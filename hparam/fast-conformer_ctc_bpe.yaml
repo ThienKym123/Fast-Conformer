@@ -141,7 +141,7 @@ model:
     pos_emb_max_len: 5000
 
     # Convolution module's params
-    conv_kernel_size: 9
+    conv_kernel_size: 10
     conv_norm_type: 'batch_norm' # batch_norm or layer_norm or groupnormN (N specifies the number of groups)
     # conv_context_size can be"causal" or a list of two integers while conv_context_size[0]+conv_context_size[1]+1==conv_kernel_size
     # null means [(kernel_size-1)//2, (kernel_size-1)//2], and 'causal' means [(kernel_size-1), 0]
@@ -175,13 +175,13 @@ model:
 
   optim:
     name: adamw
-    lr: 5e-3
+    lr: 3e-3
     # optimizer arguments
     betas: [0.9, 0.98]
     # less necessity for weight_decay as we already have large augmentations with SpecAug
     # you may need weight_decay for large models, stable AMP training, small datasets, or when lower augmentations are used
     # weight decay of 0.0 with lr of 2.0 also works fine
-    weight_decay: 5e-4
+    weight_decay: 1e-4
 
     # scheduler setup
     sched:
@@ -189,7 +189,7 @@ model:
       # scheduler config override
       warmup_steps: 10000
       warmup_ratio: null
-      min_lr: 5e-4
+      min_lr: 3e-3
 
 trainer:
   devices: -1 # number of GPUs, -1 would use all available GPUs
