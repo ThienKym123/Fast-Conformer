@@ -154,7 +154,7 @@ model:
     dropout_att: 0.1 # The dropout for multi-headed attention modules
 
     # set to non-zero to enable stochastic depth
-    stochastic_depth_drop_prob: 0.1
+    stochastic_depth_drop_prob: 0.0
     stochastic_depth_mode: linear  # linear or uniform
     stochastic_depth_start_layer: 1
 
@@ -181,13 +181,13 @@ model:
     # less necessity for weight_decay as we already have large augmentations with SpecAug
     # you may need weight_decay for large models, stable AMP training, small datasets, or when lower augmentations are used
     # weight decay of 0.0 with lr of 2.0 also works fine
-    weight_decay: 1e-3
+    weight_decay: 5e-4
 
     # scheduler setup
     sched:
       name: CosineAnnealing
       # scheduler config override
-      warmup_steps: 20000
+      warmup_steps: 10000
       warmup_ratio: null
       min_lr: 5e-4
 
