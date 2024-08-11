@@ -91,7 +91,7 @@ model:
     dir: /kaggle/working/Fast-Conformer/dict_N/tokenizer_spe_bpe_v1024  # path to directory which contains either tokenizer.model (bpe) or vocab.txt (wpe)
     type: bpe  # Can be either bpe (SentencePiece tokenizer) or wpe (WordPiece tokenizer)
 
-   preprocessor:
+  preprocessor:
     _target_: nemo.collections.asr.modules.AudioToMelSpectrogramPreprocessor
     sample_rate: ${model.sample_rate}
     normalize: "per_feature"
