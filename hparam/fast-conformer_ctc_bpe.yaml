@@ -91,7 +91,7 @@ model:
     dir: /kaggle/working/Fast-Conformer/dict_N/tokenizer_spe_bpe_v1024  # path to directory which contains either tokenizer.model (bpe) or vocab.txt (wpe)
     type: bpe  # Can be either bpe (SentencePiece tokenizer) or wpe (WordPiece tokenizer)
 
-  preprocessor:
+   preprocessor:
     _target_: nemo.collections.asr.modules.AudioToMelSpectrogramPreprocessor
     sample_rate: ${model.sample_rate}
     normalize: "per_feature"
@@ -110,7 +110,7 @@ model:
     _target_: nemo.collections.asr.modules.SpectrogramAugmentation
     freq_masks: 2 # set to zero to disable it
     # you may use lower time_masks for smaller models to have a faster convergence
-    time_masks: 10 # set to zero to disable it
+    time_masks: 5 # set to zero to disable it
     freq_width: 27
     time_width: 0.05
 
@@ -118,7 +118,7 @@ model:
     _target_: nemo.collections.asr.modules.ConformerEncoder
     feat_in: ${model.preprocessor.features}
     feat_out: -1 # you may set it if you need different output size other than the default d_model
-    n_layers: 20
+    n_layers: 18
     d_model: 512
 
     # Sub-sampling params
@@ -136,12 +136,12 @@ model:
     # [left, right] specifies the number of steps to be seen from left and right of each step in self-attention
     att_context_size: [-1, -1] # -1 means unlimited context
     att_context_style: regular # regular or chunked_limited
-    xscaling: True # scales up the input embeddings by sqrt(d_model)
+    xscaling: true # scales up the input embeddings by sqrt(d_model)
     untie_biases: true # unties the biases of the TransformerXL layers
     pos_emb_max_len: 5000
 
     # Convolution module's params
-    conv_kernel_size: 10
+    conv_kernel_size: 8
     conv_norm_type: 'batch_norm' # batch_norm or layer_norm or groupnormN (N specifies the number of groups)
     # conv_context_size can be"causal" or a list of two integers while conv_context_size[0]+conv_context_size[1]+1==conv_kernel_size
     # null means [(kernel_size-1)//2, (kernel_size-1)//2], and 'causal' means [(kernel_size-1), 0]
@@ -151,7 +151,7 @@ model:
     dropout: 0.1 # The dropout used in most of the Conformer Modules
     dropout_pre_encoder: 0.05 # The dropout used before the encoder
     dropout_emb: 0.05 # The dropout used for embeddings
-    dropout_att: 0.1 # The dropout for multi-headed attention modules
+    dropout_att: 0.05 # The dropout for multi-headed attention modules
 
     # set to non-zero to enable stochastic depth
     stochastic_depth_drop_prob: 0.0
@@ -194,7 +194,7 @@ model:
 trainer:
   devices: -1 # number of GPUs, -1 would use all available GPUs
   num_nodes: 1
-  max_epochs: 20
+  max_epochs: 40
   max_steps: -1 # computed at runtime if not set
   val_check_interval: 1.0 # Set to 0.25 to check 4 times per epoch, or an int for number of iterations
   accelerator: gpu
@@ -227,7 +227,7 @@ exp_manager:
   resume_ignore_no_checkpoint: false
 
   # You may use this section to create a W&B logger
-  create_wandb_logger: false
+  create_wandb_logger: true
   wandb_logger_kwargs:
-    name: null
-    project: null
+    name: test
+    project: FC_Vivos
