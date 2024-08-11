@@ -229,5 +229,5 @@ exp_manager:
   # You may use this section to create a W&B logger
   create_wandb_logger: true
   wandb_logger_kwargs:
-    name: test2
+    name: null
     project: FC_Vivos
