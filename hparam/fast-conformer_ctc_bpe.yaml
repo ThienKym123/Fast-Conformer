@@ -187,7 +187,7 @@ model:
     sched:
       name: CosineAnnealing
       # scheduler config override
-      warmup_steps: 12000
+      warmup_steps: 7000
       warmup_ratio: null
       min_lr: 4e-5
 
