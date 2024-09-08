@@ -187,7 +187,7 @@ model:
     sched:
       name: CosineAnnealing
       # scheduler config override
-      warmup_steps: 5000
+      warmup_steps: 1000
       warmup_ratio: null
       min_lr: 5e-5
 
@@ -230,4 +230,4 @@ exp_manager:
   create_wandb_logger: true
   wandb_logger_kwargs:
     name: null
-    project: FC_Vivos
+    project: FC_Tele
