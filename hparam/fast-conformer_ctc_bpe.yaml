@@ -118,7 +118,7 @@ model:
     _target_: nemo.collections.asr.modules.ConformerEncoder
     feat_in: ${model.preprocessor.features}
     feat_out: -1 # you may set it if you need different output size other than the default d_model
-    n_layers: 18
+    n_layers: 19
     d_model: 512
 
     # Sub-sampling params
@@ -175,26 +175,26 @@ model:
 
   optim:
     name: adamw
-    lr: 7e-4
+    lr: 2e-3
     # optimizer arguments
     betas: [0.9, 0.98]
     # less necessity for weight_decay as we already have large augmentations with SpecAug
     # you may need weight_decay for large models, stable AMP training, small datasets, or when lower augmentations are used
     # weight decay of 0.0 with lr of 2.0 also works fine
-    weight_decay: 7e-4
+    weight_decay: 2e-3
 
     # scheduler setup
     sched:
       name: CosineAnnealing
       # scheduler config override
-      warmup_steps: 2000
+      warmup_steps: 3000
       warmup_ratio: null
-      min_lr: 7e-5
+      min_lr: 1e-4
 
 trainer:
   devices: -1 # number of GPUs, -1 would use all available GPUs
   num_nodes: 1
-  max_epochs: 20
+  max_epochs: 30
   max_steps: -1 # computed at runtime if not set
   val_check_interval: 1.0 # Set to 0.25 to check 4 times per epoch, or an int for number of iterations
   accelerator: gpu
