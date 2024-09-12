@@ -1,2 +1,2 @@
 - Reference: https://github.com/PhamDangNguyen/Fast-conformerASR-NVIDIA
-- 
+- Open file code jupyter and run on Kaggle
