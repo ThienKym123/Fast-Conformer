@@ -230,4 +230,4 @@ exp_manager:
   create_wandb_logger: true
   wandb_logger_kwargs:
     name: null
-    project: FC_Tele_Vivos
+    project: FC_Vivos
